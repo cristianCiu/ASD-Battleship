@@ -1,7 +1,10 @@
 # ASD-Battleship
 
 ## CI/CD
-[![Build Status](https://travisci.com/cristianCiu/ASD-Battleship.svg)](https://travis-ci.com/cristianCiu/ASD-Battleship)
+### Travis CI
+[![Build Status](https://img.shields.io/travis/com/cristianCiu/ASD-Battleship)](https://travis-ci.com/cristianCiu/ASD-Battleship)
+### Docker
+[![dockerbuild](https://img.shields.io/docker/build/cristianciu/battleship)](https://hub.docker.com/r/cristianciu/battleship)
 
 ## Prerequisites
 ### Java
