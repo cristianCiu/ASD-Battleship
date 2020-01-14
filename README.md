@@ -5,6 +5,10 @@
 [![Build Status](https://img.shields.io/travis/com/cristianCiu/ASD-Battleship)](https://travis-ci.com/cristianCiu/ASD-Battleship)
 ### Docker
 [![dockerbuild](https://img.shields.io/docker/build/cristianciu/battleship)](https://hub.docker.com/r/cristianciu/battleship)
+### CodeCov
+<a href="https://codecov.io/gh/cristianCiu/ASD-Battleship">
+  <img src="https://codecov.io/gh/cristianCiu/ASD-Battleship/branch/master/graph/badge.svg" />
+</a>
 
 ## Prerequisites
 ### Java
