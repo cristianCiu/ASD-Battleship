@@ -11,7 +11,9 @@
 </a>
 
 ### SonarCloud
-[![QualityGate](https://sonarcloud.io/api/project_badges/measure?project=cristianCiu_ASD-Battleship)](https://sonarcloud.io/dashboard/index/com.cicd:cristianCiu_ASD-Battleship)
+[![QualityGate](https://sonarcloud.io/api/project_badges/measure?metric=alert_status&project=cristianCiu_ASD-Battleship)](https://sonarcloud.io/dashboard/index/com.cicd:cristianCiu_ASD-Battleship)
+[bugs, code_smells, coverage, duplicated_lines_density, ncloc, sqale_rating, alert_status, reliability_rating, security_rating, sqale_index, vulnerabilities]
+    
 ### License
 [![License: MIT](https://img.shields.io/badge/License-MITyellow.svg)](https://opensource.org/licenses/MIT)
 
