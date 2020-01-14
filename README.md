@@ -10,6 +10,11 @@
   <img src="https://codecov.io/gh/cristianCiu/ASD-Battleship/branch/master/graph/badge.svg" />
 </a>
 
+### SonarCloud
+[![QualityGate](https://sonarcloud.io/api/project_badges/measure?project=cristianCiu_ASD-Battleship)](https://sonarcloud.io/dashboard/index/com.cicd:cristianCiu_ASD-Battleship)
+### License
+[![License: MIT](https://img.shields.io/badge/License-MITyellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Prerequisites
 ### Java
 

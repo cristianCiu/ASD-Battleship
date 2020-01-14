@@ -102,4 +102,24 @@
             </plugin>
         </plugins>
     </build>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <email>cristian-ionut.ciuciu@stud.fh-campuswien.ac.at</email>
+            <name>Cristian Ciuciu</name>
+            <url>https://github.com/cristianCiu</url>
+            <id>cristinCiu</id>
+        </developer>
+    </developers>
+    <organization>
+        <name>FH Campus Wien</name>
+        <url> https://www.fh-campuswien.ac.at/</url>
+    </organization>
+
 </project>
