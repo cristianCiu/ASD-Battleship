@@ -1,0 +1,246 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Ship</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">sample</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Ship (sample)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Ship</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 39)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Ship$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 40)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package sample;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.apache.log4j.Logger;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.awt.*;
+<i>6</i>&nbsp;import java.util.ArrayList;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public class Ship
+<i>9</i>&nbsp;{
+<b class="nc"><i>10</i>&nbsp;    private ArrayList&lt;ShipPart&gt; shipParts = new ArrayList&lt;&gt;();</b>
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    private int length;
+<i>13</i>&nbsp;    private int xPosition;
+<i>14</i>&nbsp;    private int yPosition;
+<i>15</i>&nbsp;    private Direction direction;
+<i>16</i>&nbsp;    private int divx;
+<i>17</i>&nbsp;    private int divy;
+<b class="nc"><i>18</i>&nbsp;    private static final Logger logger = Logger.getLogger(Ship.class);</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    public int getX()
+<i>22</i>&nbsp;    {
+<b class="nc"><i>23</i>&nbsp;        return xPosition;</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public int getY()
+<i>27</i>&nbsp;    {
+<b class="nc"><i>28</i>&nbsp;        return yPosition;</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public int getDivx()
+<i>32</i>&nbsp;    {
+<b class="nc"><i>33</i>&nbsp;        return divx;</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    public int getDivy()
+<i>37</i>&nbsp;    {
+<b class="nc"><i>38</i>&nbsp;        return divy;</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public int getLength()
+<i>42</i>&nbsp;    {
+<b class="nc"><i>43</i>&nbsp;        return length;</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    public Direction getDirection()
+<i>47</i>&nbsp;    {
+<b class="nc"><i>48</i>&nbsp;        return direction;</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    public ArrayList&lt;ShipPart&gt; getShipParts()
+<i>52</i>&nbsp;    {
+<b class="nc"><i>53</i>&nbsp;        return shipParts;</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    /*ist das unterste Level vom Schiff erstellen. Wird in der Ship Methode aufgerufen. Dort bekommt es die
+<i>57</i>&nbsp;    Übergabeparameter und hier können dann die ShipParts zur ArrayList hinzugefügt werden. Kette geht bis zu main
+<i>58</i>&nbsp;    Methode saveShips hinauf.*/
+<i>59</i>&nbsp;    private void generateShip(int x, int y, int length, Direction directions)
+<i>60</i>&nbsp;    {
+<b class="nc"><i>61</i>&nbsp;        for (int i = 0; i &lt; length; i++)</b>
+<i>62</i>&nbsp;        {
+<b class="nc"><i>63</i>&nbsp;            shipParts.add(new ShipPart(new Point(x, y)));</b>
+<b class="nc"><i>64</i>&nbsp;            switch (directions)</b>
+<i>65</i>&nbsp;            {
+<i>66</i>&nbsp;                case UP:
+<b class="nc"><i>67</i>&nbsp;                    y--;</b>
+<b class="nc"><i>68</i>&nbsp;                    break;</b>
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;                case RIGHT:
+<b class="nc"><i>71</i>&nbsp;                    x++;</b>
+<b class="nc"><i>72</i>&nbsp;                    break;</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;                case LEFT:
+<b class="nc"><i>75</i>&nbsp;                    x--;</b>
+<b class="nc"><i>76</i>&nbsp;                    break;</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;                case DOWN:
+<b class="nc"><i>79</i>&nbsp;                    y++;</b>
+<i>80</i>&nbsp;                    break;
+<i>81</i>&nbsp;            }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;        }
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    /*Kriegt die Koordinaten von setShip (Field Klasse), welche die Koordinaten von saveShip(main) übergeben bekommt.
+<i>87</i>&nbsp;     Also man muss mehrere Methoden &quot;überstehen&quot;, um wirklich hier zu landen. Es wird dazwischen überprüft ob man
+<i>88</i>&nbsp;     setzen darf, ob Platz frei ist usw. Am Rande: Vergleichbar mit GUI am PC. Man macht was und es geht viele
+<i>89</i>&nbsp;     Schichten hinunter. */
+<i>90</i>&nbsp;    public Ship(int x, int y, int length, Direction directions, int diffvectorx, int diffvectory)
+<b class="nc"><i>91</i>&nbsp;    {</b>
+<b class="nc"><i>92</i>&nbsp;        this.xPosition = x;</b>
+<b class="nc"><i>93</i>&nbsp;        this.yPosition = y;</b>
+<b class="nc"><i>94</i>&nbsp;        this.direction = directions;</b>
+<b class="nc"><i>95</i>&nbsp;        this.length = length;</b>
+<b class="nc"><i>96</i>&nbsp;        this.divx = diffvectorx;</b>
+<b class="nc"><i>97</i>&nbsp;        this.divy = diffvectory;</b>
+<i>98</i>&nbsp;
+<b class="nc"><i>99</i>&nbsp;        generateShip(x, y, length, directions);</b>
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;        /*Dient nur der Ausgabe für uns zum testen*/
+<b class="nc"><i>102</i>&nbsp;        logger.debug(&quot;ich generiere schiff an X= &quot; + this.xPosition + &quot; Y =&quot; + this.yPosition + &quot; richtung&quot; + this.direction + &quot; länge =&quot; + this.length);</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    /*Die Schleife geht jeden part vom Schiff durch. Die if Bedienung checkt für jeden part (das macht es bei jedem
+<i>106</i>&nbsp;    Schleifendurchgang) ob die x und y Koordinate vom Part, das gerade in der For Schleife durchlaufen wird, den
+<i>107</i>&nbsp;    übergebenen x und y Koordinaten entspricht. (Die übergebenen, werden in der attack Methode in Field übergeben).
+<i>108</i>&nbsp;    Wenn es zutrifft, setzt es damage von dem Part auf true (das macht die destroy Methode in ShipPart)*/
+<i>109</i>&nbsp;    public boolean attack(int x, int y)
+<i>110</i>&nbsp;    {
+<b class="nc"><i>111</i>&nbsp;        for (ShipPart shippart : this.shipParts)</b>
+<i>112</i>&nbsp;        {
+<b class="nc"><i>113</i>&nbsp;            if (shippart._pixel.getX() == x &amp;&amp; shippart._pixel.getY() == y)</b>
+<i>114</i>&nbsp;            {
+<b class="nc"><i>115</i>&nbsp;                shippart.destroy();</b>
+<b class="nc"><i>116</i>&nbsp;                return true;</b>
+<i>117</i>&nbsp;            }
+<b class="nc"><i>118</i>&nbsp;        }</b>
+<b class="nc"><i>119</i>&nbsp;        return false;</b>
+<i>120</i>&nbsp;    }
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;/*Das macht im Prinzip das gleiche wie die attack Methode. Nur diesmal schaut es, ob das ganze Schiff zerstört ist. Wie?
+<i>123</i>&nbsp; Es prüft, für jeden Part (mit der For Schleife), ob es damaged ist. Wenn nicht damaged (das macht das Rufzeichen
+<i>124</i>&nbsp; vorm ShipPart in der If - Bedienung) für einen part, false. Wenn für alle parts true zurückgeliefert wird, kommt bei
+<i>125</i>&nbsp;  der Methode true raus. Sprich, Schiff ist zerstört.*/
+<i>126</i>&nbsp;    public boolean checkIfDestroyed()
+<i>127</i>&nbsp;    {
+<b class="nc"><i>128</i>&nbsp;        for (ShipPart shippart : this.shipParts)</b>
+<i>129</i>&nbsp;        {
+<b class="nc"><i>130</i>&nbsp;            if (!shippart.isDamaged())</b>
+<i>131</i>&nbsp;            {
+<b class="nc"><i>132</i>&nbsp;                return false;</b>
+<i>133</i>&nbsp;            }
+<b class="nc"><i>134</i>&nbsp;        }</b>
+<b class="nc"><i>135</i>&nbsp;        return true;</b>
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-01-14 20:28</div>
+</div>
+</body>
+</html>

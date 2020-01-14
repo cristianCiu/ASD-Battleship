@@ -1,0 +1,121 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ShipPart</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">sample</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ShipPart (sample)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ShipPart</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package sample;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.apache.log4j.Logger;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.awt.*;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public class ShipPart {
+<i>8</i>&nbsp;    /*Jeder Teil vom Schiff (in unserem Fall ist jeder Teil genau 40pixel lang) hat die Eigenschaften von der Klasse
+<i>9</i>&nbsp;    ShipPart*/
+<b class="nc"><i>10</i>&nbsp;    private static final Logger logger = Logger.getLogger(ShipPart.class);</b>
+<i>11</i>&nbsp;    public Point _pixel;
+<b class="nc"><i>12</i>&nbsp;    private boolean damage = false;</b>
+<i>13</i>&nbsp;
+<b class="nc"><i>14</i>&nbsp;    public ShipPart(Point pixel) {</b>
+<b class="nc"><i>15</i>&nbsp;        _pixel = pixel;</b>
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;        /*Dient der Ausgabe für uns, zum testen*/
+<b class="nc"><i>18</i>&nbsp;        logger.debug(&quot;Schiffteil an X = &quot;+_pixel.getX()+ &quot; Y = &quot;+_pixel.getY() +&quot; Schaden = &quot;+this.damage);</b>
+<i>19</i>&nbsp;    }
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /*ist dieser Teil vom Schiff zerstört?*/
+<i>22</i>&nbsp;    public boolean isDamaged() {
+<b class="nc"><i>23</i>&nbsp;        return damage;</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    /*Wird in der Ship klasse, in der attack Methode aufgerufen!*/
+<i>27</i>&nbsp;    public void destroy() {
+<b class="nc"><i>28</i>&nbsp;        this.damage = true;</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public int getX() {
+<b class="nc"><i>32</i>&nbsp;        return _pixel.x;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public int getY() {
+<b class="nc"><i>36</i>&nbsp;        return _pixel.y;</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-01-14 20:28</div>
+</div>
+</body>
+</html>

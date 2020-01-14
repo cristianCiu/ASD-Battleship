@@ -4,7 +4,7 @@
 ### Travis CI
 [![Build Status](https://img.shields.io/travis/com/cristianCiu/ASD-Battleship)](https://travis-ci.com/cristianCiu/ASD-Battleship)
 ### Docker
-[![dockerbuild](https://img.shields.io/docker/build/cristianciu/battleship)](https://hub.docker.com/r/cristianciu/battleship)
+[![dockerbuild](https://img.shields.io/docker/cloud/build/cristianciu/battleship)](https://hub.docker.com/r/cristianciu/battleship)
 ### CodeCov
 <a href="https://codecov.io/gh/cristianCiu/ASD-Battleship">
   <img src="https://codecov.io/gh/cristianCiu/ASD-Battleship/branch/master/graph/badge.svg" />
@@ -12,6 +12,8 @@
 
 ### SonarCloud
 [![QualityGate](https://sonarcloud.io/api/project_badges/measure?metric=alert_status&project=cristianCiu_ASD-Battleship)](https://sonarcloud.io/dashboard/index/com.cicd:cristianCiu_ASD-Battleship)
+
+possible metrics:
 [bugs, code_smells, coverage, duplicated_lines_density, ncloc, sqale_rating, alert_status, reliability_rating, security_rating, sqale_index, vulnerabilities]
     
 ### License

@@ -1,0 +1,452 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ImageShip</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">sample</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ImageShip (sample)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ImageShip</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 149)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ImageShip$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 150)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package sample;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import javafx.scene.image.Image;
+<i>4</i>&nbsp;import javafx.scene.image.ImageView;
+<i>5</i>&nbsp;import javafx.scene.input.MouseButton;
+<i>6</i>&nbsp;import javafx.scene.input.MouseEvent;
+<i>7</i>&nbsp;import org.apache.log4j.Logger;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public class ImageShip {
+<i>10</i>&nbsp;    private int x;
+<i>11</i>&nbsp;    private int y;
+<i>12</i>&nbsp;    private int length;
+<b class="nc"><i>13</i>&nbsp;    private int rotate = 1;</b>
+<i>14</i>&nbsp;    private int beginX;
+<i>15</i>&nbsp;    private int beginY;
+<i>16</i>&nbsp;    /*Wichtige Vektoren: Sind dafür da, dass die Bilder und Schiffe gleich rotiert sind und richtig liegen. Da wir es
+<i>17</i>&nbsp;     händisch hinein schreiben müssen, dass die &quot;digitalen&quot; ships (nicht die Bilder) auch rotiert sind quasi. Noch
+<i>18</i>&nbsp;     bestätigen, ob das stimmt bitte!!*/
+<i>19</i>&nbsp;    private int diffvectorx;
+<i>20</i>&nbsp;    private int diffvectory;
+<i>21</i>&nbsp;    private double startX, startY, moveX, moveY, setX, setY, newX, newY;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    private ImageView imageView;
+<i>24</i>&nbsp;    private Image image;
+<i>25</i>&nbsp;    private Direction direction;
+<i>26</i>&nbsp;
+<b class="nc"><i>27</i>&nbsp;    private boolean disable = false;</b>
+<b class="nc"><i>28</i>&nbsp;    private static final Logger logger = Logger.getLogger(ImageShip.class);</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /*Konstruktor, mit dem wir die Schiffe in der Main (großer Block am Anfang) erstellen. Jedes Schiff hat die
+<i>31</i>&nbsp;    Eigenschaften und Funktionen, die hier drinnen stehen. z.B Es sind alle Schiffe automatisch nach rechts
+<i>32</i>&nbsp;    orientiert.*/
+<b class="nc"><i>33</i>&nbsp;    public ImageShip(int x, int y, int length, Image image) {</b>
+<b class="nc"><i>34</i>&nbsp;        this.x = x;</b>
+<b class="nc"><i>35</i>&nbsp;        this.y = y;</b>
+<b class="nc"><i>36</i>&nbsp;        this.beginX = this.x;</b>
+<b class="nc"><i>37</i>&nbsp;        this.beginY = this.y;</b>
+<b class="nc"><i>38</i>&nbsp;        this.length = length;</b>
+<b class="nc"><i>39</i>&nbsp;        this.image = image;</b>
+<b class="nc"><i>40</i>&nbsp;        this.direction = Direction.RIGHT;</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;
+<b class="nc"><i>43</i>&nbsp;        this.imageView = new ImageView(image);</b>
+<b class="nc"><i>44</i>&nbsp;        imageView.setX(this.x);</b>
+<b class="nc"><i>45</i>&nbsp;        imageView.setY(this.y);</b>
+<b class="nc"><i>46</i>&nbsp;        this.setDiffvectorx(0);</b>
+<b class="nc"><i>47</i>&nbsp;        this.setDiffvectory(0);</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;
+<b class="nc"><i>50</i>&nbsp;        imageView.addEventHandler(MouseEvent.ANY, event -&gt; {</b>
+<i>51</i>&nbsp;            //Nur wenn Schiff lock==false (unten bei lock erklärt)
+<b class="nc"><i>52</i>&nbsp;            if (!disable) {</b>
+<b class="nc"><i>53</i>&nbsp;                if (event.getEventType() == MouseEvent.MOUSE_PRESSED &amp;&amp; event.getButton().equals(MouseButton.PRIMARY)) {</b>
+<i>54</i>&nbsp;                    //Koordinaten vom Mouseclick
+<b class="nc"><i>55</i>&nbsp;                    startX = event.getSceneX();</b>
+<b class="nc"><i>56</i>&nbsp;                    startY = event.getSceneY();</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;                    //Koordinaten vom Bild was geklickt wurde (schätze ich, bitte noch bestätigen!)
+<b class="nc"><i>59</i>&nbsp;                    moveX = ((ImageView) (event.getSource())).getTranslateX();</b>
+<b class="nc"><i>60</i>&nbsp;                    moveY = ((ImageView) (event.getSource())).getTranslateY();</b>
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;                }
+<b class="nc"><i>63</i>&nbsp;                if (event.getEventType() == MouseEvent.MOUSE_DRAGGED &amp;&amp; event.getButton().equals(MouseButton.PRIMARY)) {</b>
+<i>64</i>&nbsp;                    //Differenz der Koordinaten von der Maus, wo wir losgelassen haben und angefangen haben
+<b class="nc"><i>65</i>&nbsp;                    setX = event.getSceneX() - startX;</b>
+<b class="nc"><i>66</i>&nbsp;                    setY = event.getSceneY() - startY;</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;                    //Die Differenz zwischen Bild Anfang und wie weit die maus gedragged wurde
+<b class="nc"><i>69</i>&nbsp;                    newX = moveX + setX;</b>
+<b class="nc"><i>70</i>&nbsp;                    newY = moveY + setY;</b>
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;                    /*wir runden es, damit es durch 40 teilbar ist (weil alle Felder durch 40 teilbar sind)*/
+<b class="nc"><i>73</i>&nbsp;                    int diffx = (int) newX % 40;</b>
+<b class="nc"><i>74</i>&nbsp;                    newX = newX - diffx;</b>
+<i>75</i>&nbsp;
+<b class="nc"><i>76</i>&nbsp;                    int diffy = (int) newY % 40;</b>
+<b class="nc"><i>77</i>&nbsp;                    newY = newY - diffy;</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;
+<b class="nc"><i>80</i>&nbsp;                    ((ImageView) (event.getSource())).setTranslateX(newX);</b>
+<b class="nc"><i>81</i>&nbsp;                    ((ImageView) (event.getSource())).setTranslateY(newY);</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;                    /*Alle Faktoren werden berücksichtigt, damit die neuen Koordinaten stimmen, muss auch die
+<i>84</i>&nbsp;                    errechnete differenz vom rotieren mit einbezogen werden.*/
+<b class="nc"><i>85</i>&nbsp;                    setX(beginX + getDiffvectorx() + (int) newX);</b>
+<b class="nc"><i>86</i>&nbsp;                    setY(beginY + getDiffvectory() + (int) newY);</b>
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;
+<b class="nc"><i>89</i>&nbsp;                    int[] a = calculateXY(getX(), getY());</b>
+<b class="nc"><i>90</i>&nbsp;                    if (a != null) {</b>
+<b class="nc"><i>91</i>&nbsp;                        logger.debug(&quot;x= &quot; + (a[0] + 1) + &quot;y= &quot; + (a[1] + 1));</b>
+<i>92</i>&nbsp;                    }
+<i>93</i>&nbsp;                }
+<b class="nc"><i>94</i>&nbsp;                if (event.getEventType() == MouseEvent.MOUSE_CLICKED &amp;&amp; event.getButton().equals(MouseButton.SECONDARY)) {</b>
+<b class="nc"><i>95</i>&nbsp;                    rotate();</b>
+<i>96</i>&nbsp;                }
+<i>97</i>&nbsp;            }
+<i>98</i>&nbsp;        });
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    public int getDiffvectorx() {
+<b class="nc"><i>102</i>&nbsp;        return diffvectorx;</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    private void setDiffvectorx(int diffvectorx) {
+<b class="nc"><i>106</i>&nbsp;        this.diffvectorx = diffvectorx;</b>
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    public int getDiffvectory() {
+<b class="nc"><i>110</i>&nbsp;        return diffvectory;</b>
+<i>111</i>&nbsp;    }
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;    private void setDiffvectory(int diffvectory) {
+<b class="nc"><i>114</i>&nbsp;        this.diffvectory = diffvectory;</b>
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    public Direction getDirection() {
+<b class="nc"><i>118</i>&nbsp;        return direction;</b>
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    public int getX() {
+<b class="nc"><i>122</i>&nbsp;        return x;</b>
+<i>123</i>&nbsp;    }
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    private void setX(int x) {
+<b class="nc"><i>126</i>&nbsp;        this.x = x;</b>
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    public int getY() {
+<b class="nc"><i>130</i>&nbsp;        return y;</b>
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    private void setY(int y) {
+<b class="nc"><i>134</i>&nbsp;        this.y = y;</b>
+<i>135</i>&nbsp;    }
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;    public int getLength() {
+<b class="nc"><i>138</i>&nbsp;        return length;</b>
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    public ImageView getImageView() {
+<b class="nc"><i>142</i>&nbsp;        return imageView;</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    public int getBeginX() {
+<b class="nc"><i>146</i>&nbsp;        return beginX;</b>
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    public int getBeginY() {
+<b class="nc"><i>150</i>&nbsp;        return beginY;</b>
+<i>151</i>&nbsp;    }
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    public Image getImage() {
+<b class="nc"><i>154</i>&nbsp;        return image;</b>
+<i>155</i>&nbsp;    }
+<i>156</i>&nbsp;
+<i>157</i>&nbsp;    /*Gelocked wird, wenn saveShips in der main ein Schiff gespeichert wird oder wenn ein zerstörtes Schiff
+<i>158</i>&nbsp;    gezeichnet wird. Dient dafür, dass man es nicht mehr draggen kann.*/
+<i>159</i>&nbsp;    public void lock() {
+<b class="nc"><i>160</i>&nbsp;        this.disable = true;</b>
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;    public boolean isDisable() {
+<b class="nc"><i>165</i>&nbsp;        return this.disable;</b>
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;    /*Wir übergeben zwar x und y = 0 wenn wir die Methode aufrufen, bedeuetet aber nur, dass es zur
+<i>169</i>&nbsp;    Ursprungskoordinate zurückspringt (wird von dort alles relativ gerechnet). Ermöglicht durch this.x=xx...*/
+<i>170</i>&nbsp;    public void changePosition(int xx, int yy)//Position muss von den ursprugort angegeben werden und nicht von 0/0
+<i>171</i>&nbsp;    {
+<i>172</i>&nbsp;
+<b class="nc"><i>173</i>&nbsp;        this.imageView.setTranslateX(xx);</b>
+<b class="nc"><i>174</i>&nbsp;        this.imageView.setTranslateY(yy);</b>
+<b class="nc"><i>175</i>&nbsp;        this.x = xx + this.beginX + diffvectorx;</b>
+<b class="nc"><i>176</i>&nbsp;        this.y = yy + this.beginY + diffvectory;</b>
+<i>177</i>&nbsp;    }
+<i>178</i>&nbsp;
+<i>179</i>&nbsp;    /*Nach dem reseten, soll das Schiff wieder zum Ursprungsort zurück*/
+<i>180</i>&nbsp;    public void reset() {
+<b class="nc"><i>181</i>&nbsp;        this.disable = false;</b>
+<b class="nc"><i>182</i>&nbsp;        this.changePosition(0, 0);</b>
+<i>183</i>&nbsp;    }
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;    //rotiert das Bild und das im code angelegte Schiff
+<i>186</i>&nbsp;    private void rotate() {
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;        /*Die rotate Methode rotiert immer um die Mitte eines Objektes. Das ist ein Problem bei Geraden
+<i>189</i>&nbsp;         Schiffen weil sie nach dem Rotieren zwischen zwei Feldern liegen würden. Hier verhindern wir
+<i>190</i>&nbsp;         das, durch Differezenaufsummierung, je nachdem wie oft gedreht wurde.*/
+<b class="nc"><i>191</i>&nbsp;        if (getLength() % 2 == 1) {</b>
+<b class="nc"><i>192</i>&nbsp;            double value = imageView.getRotate();</b>
+<b class="nc"><i>193</i>&nbsp;            imageView.setRotate(value - 90);</b>
+<b class="nc"><i>194</i>&nbsp;        } else {</b>
+<i>195</i>&nbsp;            /*rotate: Je nachdem welcher Wert rotate hat, muss man addieren oder subtrahieren (kommt
+<i>196</i>&nbsp;             drauf an wie oft man geklickt hat),*/
+<b class="nc"><i>197</i>&nbsp;            if (rotate % 2 == 1) {</b>
+<b class="nc"><i>198</i>&nbsp;                double value = imageView.getRotate();</b>
+<b class="nc"><i>199</i>&nbsp;                imageView.setRotate(value - 90);</b>
+<b class="nc"><i>200</i>&nbsp;                imageView.setX(imageView.getX() + 20);</b>
+<b class="nc"><i>201</i>&nbsp;                imageView.setY(imageView.getY() - 20);</b>
+<b class="nc"><i>202</i>&nbsp;            } else {</b>
+<b class="nc"><i>203</i>&nbsp;                double value = imageView.getRotate();</b>
+<b class="nc"><i>204</i>&nbsp;                imageView.setRotate(value - 90);</b>
+<b class="nc"><i>205</i>&nbsp;                imageView.setX(imageView.getX() - 20);</b>
+<b class="nc"><i>206</i>&nbsp;                imageView.setY(imageView.getY() + 20);</b>
+<i>207</i>&nbsp;            }
+<i>208</i>&nbsp;        }
+<b class="nc"><i>209</i>&nbsp;        rotate++;</b>
+<i>210</i>&nbsp;
+<i>211</i>&nbsp;         /*Switch ist dafür da, um die Bilder die wir drehen und die ImageShips (&quot;Digital angelegte
+<i>212</i>&nbsp;          Schiffe&quot; die wir erstellen, nach dem Rotieren abzugleichen. Weil nur weil wir das Bild drehen,
+<i>213</i>&nbsp;          heißt es ja nicht, dass sich unsere ImageShips mitdrehen. Sind ja zwei verschiedene
+<i>214</i>&nbsp;          Entitäten. Immer Abhängig von welcher Richtung man dreht, ändern wir manuell dann die
+<i>215</i>&nbsp;          Direction mit den dementsprechenden Rechungen auch um.*/
+<b class="nc"><i>216</i>&nbsp;        switch (direction) {</b>
+<i>217</i>&nbsp;            case UP:
+<b class="nc"><i>218</i>&nbsp;                direction = Direction.LEFT;</b>
+<b class="nc"><i>219</i>&nbsp;                if (getLength() % 2 == 1) {</b>
+<b class="nc"><i>220</i>&nbsp;                    setX(getX() + 40 * (getLength() / 2));</b>
+<b class="nc"><i>221</i>&nbsp;                    setY(getY() - 40 * (getLength() / 2));</b>
+<i>222</i>&nbsp;
+<b class="nc"><i>223</i>&nbsp;                    setDiffvectorx(getDiffvectorx() + 40 * (getLength() / 2));</b>
+<b class="nc"><i>224</i>&nbsp;                    setDiffvectory(getDiffvectory() - 40 * (getLength() / 2));</b>
+<i>225</i>&nbsp;                } else {
+<b class="nc"><i>226</i>&nbsp;                    if (getLength() == 2) {</b>
+<i>227</i>&nbsp;                    } else {
+<b class="nc"><i>228</i>&nbsp;                        setX(getX() + 40);</b>
+<b class="nc"><i>229</i>&nbsp;                        setY(getY() - 40);</b>
+<i>230</i>&nbsp;
+<b class="nc"><i>231</i>&nbsp;                        setDiffvectorx(getDiffvectorx() + 40);</b>
+<b class="nc"><i>232</i>&nbsp;                        setDiffvectory(getDiffvectory() - 40);</b>
+<i>233</i>&nbsp;                    }
+<i>234</i>&nbsp;                }
+<b class="nc"><i>235</i>&nbsp;                break;</b>
+<i>236</i>&nbsp;            case DOWN:
+<b class="nc"><i>237</i>&nbsp;                direction = Direction.RIGHT;</b>
+<b class="nc"><i>238</i>&nbsp;                if (getLength() % 2 == 1) {</b>
+<b class="nc"><i>239</i>&nbsp;                    setX(getX() - 40 * (getLength() / 2));</b>
+<b class="nc"><i>240</i>&nbsp;                    setY(getY() + 40 * (getLength() / 2));</b>
+<i>241</i>&nbsp;
+<b class="nc"><i>242</i>&nbsp;                    setDiffvectorx(getDiffvectorx() - 40 * (getLength() / 2));</b>
+<b class="nc"><i>243</i>&nbsp;                    setDiffvectory(getDiffvectory() + 40 * (getLength() / 2));</b>
+<i>244</i>&nbsp;                } else {
+<b class="nc"><i>245</i>&nbsp;                    if (getLength() == 2) {</b>
+<b class="nc"><i>246</i>&nbsp;                        setX(getX() - 40);</b>
+<b class="nc"><i>247</i>&nbsp;                        setY(getY() + 40);</b>
+<i>248</i>&nbsp;
+<b class="nc"><i>249</i>&nbsp;                        setDiffvectorx(getDiffvectorx() - 40);</b>
+<b class="nc"><i>250</i>&nbsp;                        setDiffvectory(getDiffvectory() + 40);</b>
+<i>251</i>&nbsp;
+<i>252</i>&nbsp;                    } else {
+<b class="nc"><i>253</i>&nbsp;                        setX(getX() - 2 * 40);</b>
+<b class="nc"><i>254</i>&nbsp;                        setY(getY() + 2 * 40);</b>
+<i>255</i>&nbsp;
+<b class="nc"><i>256</i>&nbsp;                        setDiffvectorx(getDiffvectorx() - 40 * 2);</b>
+<b class="nc"><i>257</i>&nbsp;                        setDiffvectory(getDiffvectory() + 40 * 2);</b>
+<i>258</i>&nbsp;                    }
+<i>259</i>&nbsp;                }
+<b class="nc"><i>260</i>&nbsp;                break;</b>
+<i>261</i>&nbsp;            case LEFT:
+<b class="nc"><i>262</i>&nbsp;                direction = Direction.DOWN;</b>
+<b class="nc"><i>263</i>&nbsp;                if (getLength() % 2 == 1) {</b>
+<b class="nc"><i>264</i>&nbsp;                    setX(getX() - 40 * (getLength() / 2));</b>
+<b class="nc"><i>265</i>&nbsp;                    setY(getY() - 40 * (getLength() / 2));</b>
+<i>266</i>&nbsp;
+<b class="nc"><i>267</i>&nbsp;                    setDiffvectorx(getDiffvectorx() - 40 * (getLength() / 2));</b>
+<b class="nc"><i>268</i>&nbsp;                    setDiffvectory(getDiffvectory() - 40 * (getLength() / 2));</b>
+<i>269</i>&nbsp;                } else {
+<b class="nc"><i>270</i>&nbsp;                    if (getLength() == 2) {</b>
+<b class="nc"><i>271</i>&nbsp;                        setY(getY() - 40);</b>
+<i>272</i>&nbsp;
+<b class="nc"><i>273</i>&nbsp;                        setDiffvectory(getDiffvectory() - 40);</b>
+<i>274</i>&nbsp;                    } else {
+<b class="nc"><i>275</i>&nbsp;                        setX(getX() - 40);</b>
+<b class="nc"><i>276</i>&nbsp;                        setY(getY() - 2 * 40);</b>
+<i>277</i>&nbsp;
+<b class="nc"><i>278</i>&nbsp;                        setDiffvectorx(getDiffvectorx() - 40);</b>
+<b class="nc"><i>279</i>&nbsp;                        setDiffvectory(getDiffvectory() - 40 * 2);</b>
+<i>280</i>&nbsp;                    }
+<i>281</i>&nbsp;                }
+<b class="nc"><i>282</i>&nbsp;                break;</b>
+<i>283</i>&nbsp;            case RIGHT:
+<b class="nc"><i>284</i>&nbsp;                direction = Direction.UP;</b>
+<b class="nc"><i>285</i>&nbsp;                if (getLength() % 2 == 1) {</b>
+<b class="nc"><i>286</i>&nbsp;                    setX(getX() + 40 * (getLength() / 2));</b>
+<b class="nc"><i>287</i>&nbsp;                    setY(getY() + 40 * (getLength() / 2));</b>
+<i>288</i>&nbsp;
+<b class="nc"><i>289</i>&nbsp;                    setDiffvectorx(getDiffvectorx() + 40 * (getLength() / 2));</b>
+<b class="nc"><i>290</i>&nbsp;                    setDiffvectory(getDiffvectory() + 40 * (getLength() / 2));</b>
+<i>291</i>&nbsp;
+<i>292</i>&nbsp;                } else {
+<b class="nc"><i>293</i>&nbsp;                    if (getLength() == 2) {</b>
+<b class="nc"><i>294</i>&nbsp;                        setX(getX() + 40);</b>
+<i>295</i>&nbsp;
+<b class="nc"><i>296</i>&nbsp;                        setDiffvectorx(getDiffvectorx() + 40);</b>
+<i>297</i>&nbsp;
+<i>298</i>&nbsp;                    } else {
+<b class="nc"><i>299</i>&nbsp;                        setX(getX() + 2 * 40);</b>
+<b class="nc"><i>300</i>&nbsp;                        setY(getY() + 40);</b>
+<i>301</i>&nbsp;
+<b class="nc"><i>302</i>&nbsp;                        setDiffvectorx(getDiffvectorx() + 2 * 40);</b>
+<b class="nc"><i>303</i>&nbsp;                        setDiffvectory(getDiffvectory() + 40);</b>
+<i>304</i>&nbsp;                    }
+<i>305</i>&nbsp;                }
+<b class="nc"><i>306</i>&nbsp;                break;</b>
+<i>307</i>&nbsp;            default:
+<b class="nc"><i>308</i>&nbsp;                throw new IllegalStateException(&quot;Unexpected value: &quot; + direction);</b>
+<i>309</i>&nbsp;        }
+<b class="nc"><i>310</i>&nbsp;        int[] a = calculateXY(getX(), getY());</b>
+<b class="nc"><i>311</i>&nbsp;        if (a != null) {</b>
+<b class="nc"><i>312</i>&nbsp;            logger.debug(&quot;x= &quot; + (a[0] + 1) + &quot;y= &quot; + (a[1] + 1));</b>
+<i>313</i>&nbsp;        }
+<i>314</i>&nbsp;
+<i>315</i>&nbsp;
+<i>316</i>&nbsp;    }
+<i>317</i>&nbsp;
+<i>318</i>&nbsp;
+<i>319</i>&nbsp;    /*Verwenden wir beim reset button in der Main Methode, um auf RIGHT zu rotieren z.B. Es dreht solange, bis es der
+<i>320</i>&nbsp;     übergebenen Direction entspricht.*/
+<i>321</i>&nbsp;    public void rotateTo(Direction directionRotate) {
+<b class="nc"><i>322</i>&nbsp;        while (this.direction != directionRotate) {</b>
+<b class="nc"><i>323</i>&nbsp;            this.rotate();</b>
+<i>324</i>&nbsp;        }
+<i>325</i>&nbsp;    }
+<i>326</i>&nbsp;
+<i>327</i>&nbsp;
+<i>328</i>&nbsp;    //Dient nur zum testen als Ausgabe
+<i>329</i>&nbsp;    private int[] calculateXY(int x, int y) {
+<b class="nc"><i>330</i>&nbsp;        int[] result = new int[2];</b>
+<b class="nc"><i>331</i>&nbsp;        if (x &gt;= 480 &amp;&amp; x &lt;= 880 &amp;&amp; y &gt;= 560 &amp;&amp; y &lt;= 960) {</b>
+<i>332</i>&nbsp;            int vectorx, vectory;
+<b class="nc"><i>333</i>&nbsp;            vectorx = x - 480;</b>
+<b class="nc"><i>334</i>&nbsp;            vectory = y - 560;</b>
+<b class="nc"><i>335</i>&nbsp;            result[0] = vectorx / 40;</b>
+<b class="nc"><i>336</i>&nbsp;            result[1] = vectory / 40;</b>
+<b class="nc"><i>337</i>&nbsp;            return result;</b>
+<i>338</i>&nbsp;        }
+<b class="nc"><i>339</i>&nbsp;        return null;</b>
+<i>340</i>&nbsp;    }
+<i>341</i>&nbsp;
+<i>342</i>&nbsp;
+<i>343</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-01-14 20:28</div>
+</div>
+</body>
+</html>
