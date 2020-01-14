@@ -1,5 +1,10 @@
 # ASD-Battleship
 
+## CI/CD
+--------- cut here -------
+[![Build Status](https://travisci.com/cristianCiu/ASD-Battleship.svg)](https://travis-ci.com/ cristianCiu/ASD-Battleship)
+--------- cut here -------
+
 ## Prerequisites
 ### Java
 
