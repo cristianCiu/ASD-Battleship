@@ -28,4 +28,46 @@ class ShipTest {
         assertTrue(ship.checkIfDestroyed());
 
     }
+
+    @Test
+    void getX(){
+        Ship ship= new Ship(2,2,1,Direction.LEFT,2,2);
+
+        assertEquals(2,ship.getX());
+    }
+    @Test
+    void getY(){
+        Ship ship= new Ship(2,2,1,Direction.LEFT,2,2);
+
+        assertEquals(2, ship.getY());
+    }
+    @Test
+    void getDivx(){
+        Ship ship= new Ship(2,2,1,Direction.LEFT,2,2);
+
+        assertEquals(2, ship.getDivx());
+    }
+
+    @Test
+    void getDivy(){
+        Ship ship= new Ship(2,2,1,Direction.LEFT,2,2);
+
+        assertEquals(2, ship.getDivy());
+    }
+
+    @Test
+    void getDirection(){
+        Ship ship= new Ship(2,2,1,Direction.LEFT,2,2);
+
+        assertEquals(Direction.LEFT, ship.getDirection());
+    }
+
+    @Test
+    void getLength(){
+        Ship ship= new Ship(2,2,1,Direction.LEFT,2,2);
+
+        assertEquals(1, ship.getLength());
+    }
+
+    
 }
