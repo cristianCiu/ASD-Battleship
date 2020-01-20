@@ -11,7 +11,7 @@
 </a>
 
 ### SonarCloud
-[![QualityGate](https://sonarcloud.io/api/project_badges/measure?metric=alert_status&project=cristianCiu_ASD-Battleship)](https://sonarcloud.io/dashboard/index/com.cicd:cristianCiu_ASD-Battleship)
+[![QualityGate](https://sonarcloud.io/api/project_badges/measure?metric=alert_status&project=cristianCiu_ASD-Battleship)](https://sonarcloud.io/dashboard?id=cristianCiu_ASD-Battleship)
 
 possible metrics:
 [bugs, code_smells, coverage, duplicated_lines_density, ncloc, sqale_rating, alert_status, reliability_rating, security_rating, sqale_index, vulnerabilities]
