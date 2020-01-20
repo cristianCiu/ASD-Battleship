@@ -22,7 +22,7 @@
 
         <!-- GitHub OAuth token & server -->
         <github.global.server>github</github.global.server>
-        <github.global.oauth2Token>f121f1b1c234ef2c8b68add99afd69c20b554b70 </github.global.oauth2Token>
+        
     </properties>
 
     <dependencies>

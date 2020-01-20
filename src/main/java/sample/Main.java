@@ -20,7 +20,6 @@ public class Main extends Application {
     static final String USER = "sa";
     static final String PASS = "";
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         logger.info("Starting game");
