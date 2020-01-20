@@ -5,11 +5,11 @@ jdk:
   - openjdk13
 
 services:
-         #Linking Travis CI and Docker
   - docker
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker pull openjdk:13-jdk
+  -
 script:
   #We avoid this error :" the job exceeded the maximum log length and has been terminated "
   - echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<settings
