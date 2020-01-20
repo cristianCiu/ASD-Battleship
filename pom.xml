@@ -15,6 +15,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>13</maven.compiler.release>
         <javafx.version>13</javafx.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <docker.image.prefix>cristianciu</docker.image.prefix>
+        <maven.deploy.skip>true</maven.deploy.skip>
+
+        <!-- GitHub OAuth token & server -->
+        <github.global.server>github</github.global.server>
+        <github.global.oauth2Token>f121f1b1c234ef2c8b68add99afd69c20b554b70 </github.global.oauth2Token>
     </properties>
 
     <dependencies>
